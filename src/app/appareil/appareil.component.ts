@@ -15,9 +15,9 @@ export class AppareilComponent implements OnInit {
     constructor(private appareilService: AppareilService) { }
 
     onSwitch() {
-        if(this.appareilStatus === 'Allumé') {
+        if(this.appareilStatus === 'On') {
             this.appareilService.switchOffOne(this.index);
-        } else if(this.appareilStatus === 'Eteint') {
+        } else if(this.appareilStatus === 'Off') {
             this.appareilService.switchOnOne(this.index);
         }
     }
@@ -30,9 +30,9 @@ export class AppareilComponent implements OnInit {
     }
 
     getColor() {
-        if(this.appareilStatus === 'Allumé') {
+        if(this.appareilStatus === 'On') {
             return 'green';
-        } else if(this.appareilStatus === 'Eteint') {
+        } else if(this.appareilStatus === 'Off') {
             return 'red';
         }
     }

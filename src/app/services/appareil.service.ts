@@ -1,39 +1,39 @@
 export class AppareilService {
 
     // Array containing the devices
-    appareils = [
+    devices = [
         {
             name: 'River',
-            status: 'Eteint'
+            status: 'Off'
         },
         {
             name: 'Gateway',
-            status: 'Allumé'
+            status: 'On'
         },
         {
             name: 'Church',
-            status: 'Eteint'
+            status: 'Off'
         }
     ];
 
     switchOnAll() {
-        for(let appareil of this.appareils) {
-            appareil.status = 'Allumé';
+        for(let device of this.devices) {
+            device.status = 'On';
         }
     }
 
     switchOffAll() {
-        for (let appareil of this.appareils) {
-            appareil.status = 'Eteint';
+        for (let device of this.devices) {
+            device.status = 'Off';
         }
     }
 
     switchOnOne(i: number) {
-        this.appareils[i].status = 'Allumé';
+        this.devices[i].status = 'On';
     }
 
     switchOffOne(i: number) {
-        this.appareils[i].status = 'Eteint';
+        this.devices[i].status = 'Off';
     }
 
 }

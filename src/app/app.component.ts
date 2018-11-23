@@ -9,7 +9,7 @@ import {AppareilService} from './services/appareil.service';
 export class AppComponent implements OnInit {
     title = 'Smart Forest Dashboard';
     isAuth = false;
-    appareils: any[];
+    devices: any[];
 
     lastUpdate = new Promise((resolve, reject) => {
         const date = new Date();
@@ -28,11 +28,11 @@ export class AppComponent implements OnInit {
         );
     }
 
-    onAllumer() {
+    onSwitchOn() {
         this.appareilService.switchOnAll();
     }
 
-    onEteindre() {
+    onSwitchOff() {
         if(confirm('Etes-vous sûr de vouloir éteindre tous vos appareils ?')) {
             this.appareilService.switchOffAll();
         } else {
@@ -41,6 +41,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.appareils = this.appareilService.appareils;
+        this.devices = this.appareilService.devices;
     }
 }
