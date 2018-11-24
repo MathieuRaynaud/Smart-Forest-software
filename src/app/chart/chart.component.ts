@@ -54,6 +54,26 @@ export class ChartComponent implements OnInit {
     this.add();
     this.add();
     this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
+    this.add();
   }
 
 }
