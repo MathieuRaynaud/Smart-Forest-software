@@ -8,7 +8,20 @@ import {Chart} from 'angular-highcharts';
 })
 export class ChartComponent implements OnInit {
 
+  constructor() { }
+
     chart = new Chart({
+        xAxis: {
+            type: 'datetime',
+            title: {
+                text: 'Date'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature'
+            }
+        },
         chart: {
             type: 'line'
         },
@@ -28,52 +41,24 @@ export class ChartComponent implements OnInit {
 
     // add point to chart serie
     add() {
-        this.chart.addPoint(Math.floor(Math.random() * 10));
+        this.chart.addPoint(Math.floor(Math.random() * 30));
     }
 
-  constructor() { }
+    add20Points() {
+        let j = 0;
+        for (let i = 0; i < 20; i++) {
+            if(i > 12){
+                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), 15 + Math.floor(Math.random() * 15) - Math.floor(Math.random() * 15)]);
+                j++;
+            } else {
+                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), 15 + Math.floor(Math.random() * 15) - Math.floor(Math.random() * 15)]);
+            }
+        }
+    }
+
 
   ngOnInit() {
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
-    this.add();
+    this.add20Points();
   }
 
 }

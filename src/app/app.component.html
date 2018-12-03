@@ -9,9 +9,9 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            <h2>My weather stations</h2>
+            <!--<h2>My weather stations</h2>-->
             <p>Last update: {{ lastUpdate | async | date: 'short' }}</p>
-            <ul class="list-group">
+            <!--<ul class="list-group">
                 <app-appareil  *ngFor="let device of devices; let i = index"
                                [appareilName]="device.name"
                                [appareilStatus]="device.status"
@@ -22,7 +22,7 @@
                     (click)="onSwitchOn()">Switch on all</button>
             <button class="btn btn-danger"
                     [disabled]="!isAuth"
-                    (click)="onSwitchOff()">Switch off all</button>
+                    (click)="onSwitchOff()">Switch off all</button>-->
 
             <app-map></app-map>
             <app-chart></app-chart>
