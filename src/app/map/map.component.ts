@@ -7,6 +7,8 @@ import * as L from 'leaflet';
     styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
+    pinClicked = 'none';
+
     lat = 42.498167;
     lon = 3.026309;
     devices = [
@@ -42,9 +44,12 @@ export class MapComponent implements OnInit {
         });
 
         this.devices.forEach(device => {
-            L.marker([device.lat, device.lon], {icon: myIcon}).bindPopup(device.name).addTo(mymap);
+            const marker = L.marker([device.lat, device.lon], {icon: myIcon, title: device.name}).bindPopup(device.name).addTo(mymap);
+            marker.on('click', function(){
+                this.pinClicked = marker.options.title;
+                console.log(this.pinClicked);
+            });
         });
-
     }
 
 }

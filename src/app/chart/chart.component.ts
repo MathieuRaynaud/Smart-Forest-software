@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Chart} from 'angular-highcharts';
+import {MapComponent} from '../map/map.component';
 
 @Component({
   selector: 'app-chart',
@@ -33,7 +34,15 @@ export class ChartComponent implements OnInit {
         },
         series: [
             {
-                name: 'Temperature',
+                name: 'Temperature at Church',
+                data: []
+            },
+            {
+                name: 'Temperature at Gateway',
+                data: []
+            },
+            {
+                name: 'Temperature at River',
                 data: []
             }
         ]
@@ -47,18 +56,25 @@ export class ChartComponent implements OnInit {
     add20Points() {
         let j = 0;
         for (let i = 0; i < 20; i++) {
-            if(i > 12){
-                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), 15 + Math.floor(Math.random() * 15) - Math.floor(Math.random() * 15)]);
+            if (i > 12) {
+                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)],0);
+                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)],1);
+                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)],2);
                 j++;
             } else {
-                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), 15 + Math.floor(Math.random() * 15) - Math.floor(Math.random() * 15)]);
+                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)],0);
+                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)],1);
+                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)],2);
             }
         }
     }
 
 
   ngOnInit() {
-    this.add20Points();
+      /*.devices.forEach(device => {
+          this.chart.addSeries({name: device.name});
+      });*/
+      this.add20Points();
   }
 
 }
