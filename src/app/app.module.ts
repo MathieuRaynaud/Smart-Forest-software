@@ -14,6 +14,9 @@ import { MapComponent } from './map/map.component';
 import { ChartComponent } from './chart/chart.component';
 import { HighmapComponent } from './highmap/highmap.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './services/data.service';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -26,11 +29,13 @@ import { HighmapComponent } from './highmap/highmap.component';
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        ChartModule
+        ChartModule,
+        HttpClientModule
     ],
     providers: [
         AppareilService,
-        { provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting, highmaps ] }
+        { provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting, highmaps ] },
+        DataService
     ],
     bootstrap: [AppComponent]
 })

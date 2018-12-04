@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Chart} from 'angular-highcharts';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-chart',
@@ -8,28 +9,9 @@ import {Chart} from 'angular-highcharts';
 })
 export class ChartComponent implements OnInit {
 
-    devicesArray = [
-            {name: 'Gateway',
-            lat: 42.498167,
-            lon: 3.026309,
-            serie: {name: 'Gateway',
-            data: []}
-            },
-            {name: 'River',
-            lat: 42.489569,
-            lon: 3.054538,
-            serie: {name: 'River',
-            data: []}
-            },
-            {name: 'Church',
-            lat: 42.528080,
-            lon: 2.999987,
-            serie: {name: 'Church',
-            data: []}
-            }
-    ]
+    devices: any[];
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
     chart = new Chart({
         xAxis: {
@@ -60,31 +42,36 @@ export class ChartComponent implements OnInit {
     }
 
     initializeSeries() {
-        this.devicesArray.forEach(device => {
+        this.devices.forEach(device => {
             this.chart.addSeries(device.serie, true);
         });
+    }
+
+    randomTemperature() {
+        return 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20);
     }
 
     add20Points() {
         let j = 0;
         for (let i = 0; i < 20; i++) {
             if (i > 12) {
-                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)], 0 );
-                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)], 1 );
-                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)], 2 );
+                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 0 );
+                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 1 );
+                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 2 );
                 j++;
             } else {
-                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)], 0 );
-                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)], 1 );
-                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20)], 2 );
+                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), this.randomTemperature()], 0 );
+                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), this.randomTemperature()], 1 );
+                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), this.randomTemperature()], 2 );
             }
         }
     }
 
 
   ngOnInit() {
-      this.initializeSeries();
-      this.add20Points();
+        this.devices = this.dataService.devicesArray;
+        this.initializeSeries();
+        this.add20Points();
   }
 
 }

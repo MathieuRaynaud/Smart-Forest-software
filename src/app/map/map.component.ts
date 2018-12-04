@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import {DataService} from '../services/data.service';
 
 @Component({
     selector: 'app-map',
@@ -11,21 +12,13 @@ export class MapComponent implements OnInit {
 
     lat = 42.498167;
     lon = 3.026309;
-    devices = [
-        {name: 'Gateway',
-            lat: 42.498167,
-            lon: 3.026309 },
-        {name: 'River',
-            lat: 42.489569,
-            lon: 3.054538},
-        {name: 'Church',
-            lat: 42.528080,
-            lon: 2.999987}
-    ];
+    devices: any[];
 
-    constructor() { }
+    constructor(private dataService: DataService) { }
 
     ngOnInit() {
+        this.devices = this.dataService.devicesArray;
+
         // Créer l'objet "mymap" et l'insèrer dans l'élément HTML qui a l'ID "map"
         const mymap = L.map('map').setView([this.lat, this.lon], 13);
         // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
