@@ -20,10 +20,7 @@ export class MapComponent implements OnInit {
             lon: 3.054538},
         {name: 'Church',
             lat: 42.528080,
-            lon: 2.999987},
-        {name: 'Test',
-            lat: 43.528080,
-            lon: 4.999987}
+            lon: 2.999987}
     ];
 
     constructor() { }
