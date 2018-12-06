@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AppareilService} from './services/appareil.service';
+import { HttpClient } from '@angular/common/http';
+import {DataService} from './services/data.service';
 
 @Component({
     selector: 'app-root',
@@ -20,7 +22,7 @@ export class AppComponent implements OnInit {
         );
     });
 
-    constructor(private appareilService: AppareilService) {
+    constructor(private appareilService: AppareilService, private dataService: DataService) {
         setTimeout(
             () => {
                 this.isAuth = true;
@@ -40,7 +42,8 @@ export class AppComponent implements OnInit {
         }
     }
 
-    ngOnInit(){
-        this.devices = this.appareilService.devices;
+    ngOnInit() {
+        this.dataService.loadData();
+        //this.devices = this.appareilService.devices;
     }
 }

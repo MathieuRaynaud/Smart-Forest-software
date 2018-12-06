@@ -1,8 +1,14 @@
 import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class DataService {
 
-    devicesArray = [
+    private _url = 'http://localhost:4200/assets/data.json';
+
+    devicesArray: any[];
+
+    /*devicesArray = [
         {name: 'Gateway',
             lat: 42.498167,
             lon: 3.026309,
@@ -21,9 +27,18 @@ export class DataService {
             serie: {name: 'Church',
                 data: []}
         }
-    ]
+    ];*/
 
-    constructor() {
+    constructor(private _httpClient: HttpClient) {
+    }
+
+    async loadData() {
+        await this._httpClient.get(this._url).subscribe(data => {
+            this.devicesArray = data as Array<any[]>;
+        },
+        err => {
+            console.log('error: ', err);
+        });
     }
 
 }
