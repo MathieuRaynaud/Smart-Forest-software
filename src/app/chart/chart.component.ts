@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { DataService } from '../services/data.service';
+import {SeriesOptions} from 'highcharts';
 
 @Component({
   selector: 'app-chart',
@@ -11,7 +12,7 @@ export class ChartComponent implements OnInit {
 
     devices: any[];
 
-  constructor(private dataService: DataService) { }
+    constructor(private dataService: DataService) { }
 
     chart = new Chart({
         xAxis: {
@@ -41,9 +42,10 @@ export class ChartComponent implements OnInit {
         this.chart.addPoint(Math.floor(Math.random() * 30));
     }
 
-    initializeSeries() {
-        this.devices.forEach(device => {
-            this.chart.addSeries(device.serie, true);
+    async initializeSeries() {
+        await this.devices.forEach(async device => {
+            const _data: number[] = await device.data as number[];
+            this.chart.addSeries({name: device.serie.name, data: _data}, true);
         });
     }
 
@@ -68,10 +70,10 @@ export class ChartComponent implements OnInit {
     }
 
 
-  ngOnInit() {
-        this.devices = this.dataService.devicesArray;
-        this.initializeSeries();
-        this.add20Points();
+  async ngOnInit() {
+      this.devices = await this.dataService.loadData();
+      await this.initializeSeries();
+      this.add20Points();
   }
 
 }

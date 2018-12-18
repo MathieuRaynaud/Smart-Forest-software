@@ -16,8 +16,8 @@ export class MapComponent implements OnInit {
 
     constructor(private dataService: DataService) { }
 
-    ngOnInit() {
-        this.devices = this.dataService.devicesArray;
+    async ngOnInit() {
+        this.devices = await this.dataService.loadData();
 
         // Créer l'objet "mymap" et l'insèrer dans l'élément HTML qui a l'ID "map"
         const mymap = L.map('map').setView([this.lat, this.lon], 13);

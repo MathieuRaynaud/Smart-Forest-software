@@ -42,8 +42,7 @@ export class AppComponent implements OnInit {
         }
     }
 
-    ngOnInit() {
-        this.dataService.loadData();
-        //this.devices = this.appareilService.devices;
+    async ngOnInit() {
+        this.devices = await this.dataService.loadData();
     }
 }
