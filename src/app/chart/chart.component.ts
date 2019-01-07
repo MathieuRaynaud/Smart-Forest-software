@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { DataService } from '../services/data.service';
-import {SeriesOptions} from 'highcharts';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, OnChanges {
 
     devices: any[];
+    serieToDisplay: string;
 
     constructor(private dataService: DataService) { }
 
     chart = new Chart({
         xAxis: {
             type: 'datetime',
+            dateTimeLabelFormats: {
+                day: '%d %b %Y'
+            },
             title: {
                 text: 'Date'
             }
@@ -43,9 +46,15 @@ export class ChartComponent implements OnInit {
     }
 
     async initializeSeries() {
+        let serieIndex = 0;
         await this.devices.forEach(async device => {
-            const _data: number[] = await device.data as number[];
-            this.chart.addSeries({name: device.serie.name, data: _data}, true);
+            await this.chart.addSeries({name: device.serie.name, data: []}, true);
+            for (let i = 0; i < device.serie.data.length; i++) {
+                const date = Date.parse(device.serie.data[i].date);
+                this.chart.addPoint([date, parseInt(device.serie.data[i].temp, 10)], serieIndex);
+            }
+            console.log('Serie added !');
+            serieIndex++;
         });
     }
 
@@ -72,8 +81,14 @@ export class ChartComponent implements OnInit {
 
   async ngOnInit() {
       this.devices = await this.dataService.loadData();
+      //console.log(this.devices);
       await this.initializeSeries();
       this.add20Points();
+  }
+
+  ngOnChanges(): void {
+        this.serieToDisplay = this.dataService.pinMarked;
+        console.log(this.serieToDisplay);
   }
 
 }

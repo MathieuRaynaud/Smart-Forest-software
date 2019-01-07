@@ -11,25 +11,10 @@
         <div class="col-xs-12">
             <!--<h2>My weather stations</h2>-->
             <p>Last update: {{ lastUpdate | async | date: 'short' }}</p>
-            <!--<ul class="list-group">
-                <app-appareil  *ngFor="let device of devices; let i = index"
-                               [appareilName]="device.name"
-                               [appareilStatus]="device.status"
-                               [index]="i"></app-appareil>
-            </ul>
-            <button class="btn btn-success"
-                    [disabled]="!isAuth"
-                    (click)="onSwitchOn()">Switch on all</button>
-            <button class="btn btn-danger"
-                    [disabled]="!isAuth"
-                    (click)="onSwitchOff()">Switch off all</button>-->
 
             <app-map></app-map>
             <div id="blank"></div>
             <app-chart></app-chart>
-<!--
-            <app-highmap></app-highmap>
--->
         </div>
     </div>
 </div>

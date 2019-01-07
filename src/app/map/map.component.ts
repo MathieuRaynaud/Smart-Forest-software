@@ -35,9 +35,10 @@ export class MapComponent implements OnInit {
 
         this.devices.forEach(device => {
             const marker = L.marker([device.lat, device.lon], {icon: myIcon, title: device.name}).bindPopup(device.name).addTo(mymap);
-            marker.on('click', function(){
+            marker.on('click', function() {
                 this.pinClicked = marker.options.title;
                 console.log(this.pinClicked);
+                this.dataService.updatePinMarked(marker.options.title);
             });
         });
     }
