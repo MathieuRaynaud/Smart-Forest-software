@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Subject} from 'rxjs';
 
 @Injectable()
 export class DataService {
@@ -8,7 +9,15 @@ export class DataService {
 
     devicesArray: any[];
 
-    pinClicked = 'none';
+    pinClickedName = 'none';
+
+    public configObservable = new Subject<string>();
+
+    emitConfig(val) {
+        this.configObservable.next(val);
+    }
+
+    @Output() pinClicked = new EventEmitter<string>();
 
     constructor(private _httpClient: HttpClient) {
     }
@@ -22,8 +31,9 @@ export class DataService {
     }
 
     updatePinClicked(pinName: string): any {
-        this.pinClicked = pinName;
-        console.log('Data Service -> ' + this.pinClicked);
+        this.pinClickedName = pinName;
+        console.log('Data Service -> ' + this.pinClickedName);
+        this.pinClicked.emit(this.pinClickedName);
     }
 
     parseDate(dateString: string) {

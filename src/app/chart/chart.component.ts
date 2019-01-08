@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { DataService } from '../services/data.service';
 
@@ -7,12 +7,18 @@ import { DataService } from '../services/data.service';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements OnInit, OnChanges {
+export class ChartComponent implements OnInit {
 
     devices: any[];
-    serieToDisplay: string;
+    serieToDisplay = 'all';
 
-    constructor(private dataService: DataService) { }
+
+    constructor(private dataService: DataService) {
+        this.dataService.configObservable.subscribe(value => {
+            this.serieToDisplay = value;
+            this.displaySeries(this.serieToDisplay);
+        });
+    }
 
     chart = new Chart({
         xAxis: {
@@ -39,11 +45,6 @@ export class ChartComponent implements OnInit, OnChanges {
             enabled: false
         }
     });
-
-    // add point to chart serie
-    add() {
-        this.chart.addPoint(Math.floor(Math.random() * 30));
-    }
 
     async initializeSeries() {
         let serieIndex = 0;
@@ -78,17 +79,20 @@ export class ChartComponent implements OnInit, OnChanges {
         }
     }
 
+    displaySeries(serieToDisplay) {
+        for (let i = 0; i < this.chart.ref.series.length; i++) {
+            if (serieToDisplay === 'none' || this.chart.ref.series[i].name === serieToDisplay) {
+                this.chart.ref.series[i].show();
+            } else {
+                this.chart.ref.series[i].hide();
+            }
+        }
+    }
 
-  async ngOnInit() {
+    async ngOnInit() {
       this.devices = await this.dataService.loadData();
-      //console.log(this.devices);
       await this.initializeSeries();
       this.add20Points();
-  }
-
-  ngOnChanges(): void {
-        this.serieToDisplay = this.dataService.pinClicked;
-        console.log('Chart -> ' + this.serieToDisplay);
-  }
+    }
 
 }
