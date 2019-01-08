@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {AppareilService} from './services/appareil.service';
-import { HttpClient } from '@angular/common/http';
 import {DataService} from './services/data.service';
 
 @Component({
@@ -10,7 +8,6 @@ import {DataService} from './services/data.service';
 })
 export class AppComponent implements OnInit {
     title = 'Smart Forest Dashboard';
-    isAuth = false;
     devices: any[];
 
     lastUpdate = new Promise((resolve, reject) => {
@@ -22,24 +19,7 @@ export class AppComponent implements OnInit {
         );
     });
 
-    constructor(private appareilService: AppareilService, private dataService: DataService) {
-        setTimeout(
-            () => {
-                this.isAuth = true;
-            }, 4000
-        );
-    }
-
-    onSwitchOn() {
-        this.appareilService.switchOnAll();
-    }
-
-    onSwitchOff() {
-        if (confirm('Etes-vous sûr de vouloir éteindre tous vos appareils ?')) {
-            this.appareilService.switchOffAll();
-        } else {
-            return null;
-        }
+    constructor(private dataService: DataService) {
     }
 
     async ngOnInit() {
