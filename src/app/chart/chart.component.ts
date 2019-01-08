@@ -10,8 +10,7 @@ import { DataService } from '../services/data.service';
 export class ChartComponent implements OnInit {
 
     devices: any[];
-    serieToDisplay = 'all';
-
+    serieToDisplay = 'none';
 
     constructor(private dataService: DataService) {
         this.dataService.configObservable.subscribe(value => {
@@ -54,7 +53,6 @@ export class ChartComponent implements OnInit {
                 const date = Date.parse(device.serie.data[i].date);
                 this.chart.addPoint([date, parseInt(device.serie.data[i].temp, 10)], serieIndex);
             }
-            console.log('Serie added !');
             serieIndex++;
         });
     }

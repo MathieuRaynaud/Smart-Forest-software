@@ -30,7 +30,6 @@ export class MapComponent implements OnInit {
 
         mymap.on('click', () => {
             this.dataService.updatePinClicked('none');
-            this.dataService.emitConfig('none');
         });
 
         const myIcon = L.icon({
@@ -42,7 +41,6 @@ export class MapComponent implements OnInit {
                 {icon: myIcon, title: device.name}).bindPopup(device.name).addTo(mymap);
             marker.on('click', () => {
                 this.dataService.updatePinClicked(marker.options.title);
-                this.dataService.emitConfig(marker.options.title);
             });
         });
     }
