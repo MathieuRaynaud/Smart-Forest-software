@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {concat} from 'rxjs';
 
 @Injectable()
 export class DataService {
@@ -9,7 +8,7 @@ export class DataService {
 
     devicesArray: any[];
 
-    pinMarked: string = 'none';
+    pinClicked = 'none';
 
     constructor(private _httpClient: HttpClient) {
     }
@@ -22,8 +21,9 @@ export class DataService {
         return this.devicesArray;
     }
 
-    updatePinMarked(pinName: string) {
-        this.pinMarked = pinName;
+    updatePinClicked(pinName: string): any {
+        this.pinClicked = pinName;
+        console.log('Data Service -> ' + this.pinClicked);
     }
 
     parseDate(dateString: string) {

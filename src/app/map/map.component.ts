@@ -8,7 +8,6 @@ import {DataService} from '../services/data.service';
     styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-    pinClicked = 'none';
 
     lat = 42.498167;
     lon = 3.026309;
@@ -34,11 +33,10 @@ export class MapComponent implements OnInit {
         });
 
         this.devices.forEach(device => {
-            const marker = L.marker([device.lat, device.lon], {icon: myIcon, title: device.name}).bindPopup(device.name).addTo(mymap);
-            marker.on('click', function() {
-                this.pinClicked = marker.options.title;
-                console.log(this.pinClicked);
-                this.dataService.updatePinMarked(marker.options.title);
+            const marker = L.marker([device.lat, device.lon],
+                {icon: myIcon, title: device.name}).bindPopup(device.name).addTo(mymap);
+            marker.on('click', () => {
+                this.dataService.updatePinClicked(marker.options.title);
             });
         });
     }

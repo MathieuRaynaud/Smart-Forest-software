@@ -87,8 +87,8 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-        this.serieToDisplay = this.dataService.pinMarked;
-        console.log(this.serieToDisplay);
+        this.serieToDisplay = this.dataService.pinClicked;
+        console.log('Chart -> ' + this.serieToDisplay);
   }
 
 }
