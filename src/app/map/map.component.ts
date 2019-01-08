@@ -28,6 +28,10 @@ export class MapComponent implements OnInit {
             maxZoom: 20
         }).addTo(mymap);
 
+        mymap.on('click', () => {
+            this.dataService.updatePinClicked('none');
+        });
+
         const myIcon = L.icon({
             iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/images/marker-icon.png'
         });
