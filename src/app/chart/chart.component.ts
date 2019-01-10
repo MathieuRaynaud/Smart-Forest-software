@@ -45,13 +45,41 @@ export class ChartComponent implements OnInit {
         }
     });
 
+    chartHumidity = new Chart({
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                day: '%d %b %Y'
+            },
+            title: {
+                text: 'Date'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Humidity'
+            }
+        },
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Humidity Chart'
+        },
+        credits: {
+            enabled: false
+        }
+    });
+
     async initializeSeries() {
         let serieIndex = 0;
         await this.devices.forEach(async device => {
             await this.chart.addSeries({name: device.serie.name, data: []}, true);
+            await this.chartHumidity.addSeries({name: device.serie.name, data: []}, true);
             for (let i = 0; i < device.serie.data.length; i++) {
                 const date = Date.parse(device.serie.data[i].date);
                 this.chart.addPoint([date, parseInt(device.serie.data[i].temp, 10)], serieIndex);
+                this.chartHumidity.addPoint([date, parseInt(device.serie.data[i].hum, 10)], serieIndex);
             }
             serieIndex++;
         });
@@ -83,8 +111,10 @@ export class ChartComponent implements OnInit {
         for (let i = 0; i < this.chart.ref.series.length; i++) {
             if (serieToDisplay === 'none' || this.chart.ref.series[i].name === serieToDisplay) {
                 this.chart.ref.series[i].show();
+                this.chartHumidity.ref.series[i].show();
             } else {
                 this.chart.ref.series[i].hide();
+                this.chartHumidity.ref.series[i].hide();
             }
         }
     }
@@ -92,7 +122,7 @@ export class ChartComponent implements OnInit {
     async ngOnInit() {
       this.devices = await this.dataService.loadData();
       await this.initializeSeries();
-      this.add20Points();
+      //this.add20Points();
     }
 
 }
