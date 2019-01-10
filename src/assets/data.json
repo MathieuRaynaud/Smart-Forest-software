@@ -2,6 +2,7 @@
   "name": "Gateway",
   "lat": "42.498167",
   "lon": "3.026309",
+  "alt": "600",
   "serie": {
     "name": "Gateway",
     "data" : [
@@ -26,6 +27,7 @@
     "name": "River",
     "lat": "42.489569",
     "lon": "3.054538",
+    "alt": "500",
     "serie": {
       "name":  "River",
       "data" : [
@@ -50,6 +52,7 @@
     "name": "Church",
     "lat": "42.528080",
     "lon": "2.999987",
+    "alt": "542",
     "serie": {
       "name":  "Church",
       "data" : [
@@ -74,6 +77,7 @@
     "name": "Madeloc",
     "lat": "42.490745",
     "lon": "3.074648",
+    "alt": "539",
     "serie": {
       "name":  "Madeloc",
       "data" : [

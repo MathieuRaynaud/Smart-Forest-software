@@ -37,10 +37,11 @@ export class MapComponent implements OnInit {
         });
 
         this.devices.forEach(device => {
+            const pinTitle = (device.name + ' (' + device.alt + ' m)');
             const marker = L.marker([device.lat, device.lon],
-                {icon: myIcon, title: device.name}).bindPopup(device.name).addTo(mymap);
+                {icon: myIcon, title: pinTitle}).bindPopup(pinTitle).addTo(mymap);
             marker.on('click', () => {
-                this.dataService.updatePinClicked(marker.options.title);
+                this.dataService.updatePinClicked(device.name);
             });
         });
     }
