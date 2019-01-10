@@ -12,12 +12,14 @@ import { ChartComponent } from './chart/chart.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './services/data.service';
+import { HttpHandlerComponent } from './http-handler/http-handler.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         MapComponent,
-        ChartComponent
+        ChartComponent,
+        HttpHandlerComponent
     ],
     imports: [
         BrowserModule,
