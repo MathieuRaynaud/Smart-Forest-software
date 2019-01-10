@@ -7,7 +7,6 @@ import {DataService} from './services/data.service';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    title = 'Smart Forest Dashboard';
     devices: any[];
 
     lastUpdate = new Promise((resolve, reject) => {
