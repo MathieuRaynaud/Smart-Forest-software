@@ -31,7 +31,7 @@ export class ChartComponent implements OnInit {
         },
         yAxis: {
             title: {
-                text: 'Temperature'
+                text: 'Temperature (°C)'
             }
         },
         chart: {
@@ -57,7 +57,7 @@ export class ChartComponent implements OnInit {
         },
         yAxis: {
             title: {
-                text: 'Humidity'
+                text: 'Humidity (%)'
             }
         },
         chart: {
@@ -71,15 +71,71 @@ export class ChartComponent implements OnInit {
         }
     });
 
+    chartO3 = new Chart({
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                day: '%d %b %Y'
+            },
+            title: {
+                text: 'Date'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'O3 (ppb)'
+            }
+        },
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Ozone Chart'
+        },
+        credits: {
+            enabled: false
+        }
+    });
+
+    chartLuminosity = new Chart({
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                day: '%d %b %Y'
+            },
+            title: {
+                text: 'Date'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Luminosity (%)'
+            }
+        },
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Luminosity Chart'
+        },
+        credits: {
+            enabled: false
+        }
+    });
+
     async initializeSeries() {
         let serieIndex = 0;
         await this.devices.forEach(async device => {
             await this.chart.addSeries({name: device.serie.name, data: []}, true);
             await this.chartHumidity.addSeries({name: device.serie.name, data: []}, true);
+            await this.chartO3.addSeries({name: device.serie.name, data: []}, true);
+            await this.chartLuminosity.addSeries({name: device.serie.name, data: []}, true);
             for (let i = 0; i < device.serie.data.length; i++) {
                 const date = Date.parse(device.serie.data[i].date);
                 this.chart.addPoint([date, parseInt(device.serie.data[i].temp, 10)], serieIndex);
                 this.chartHumidity.addPoint([date, parseInt(device.serie.data[i].hum, 10)], serieIndex);
+                this.chartO3.addPoint([date, parseInt(device.serie.data[i].o3, 10)], serieIndex);
+                this.chartLuminosity.addPoint([date, parseInt(device.serie.data[i].lum, 10)], serieIndex);
             }
             serieIndex++;
         });
@@ -112,9 +168,13 @@ export class ChartComponent implements OnInit {
             if (serieToDisplay === 'none' || this.chart.ref.series[i].name === serieToDisplay) {
                 this.chart.ref.series[i].show();
                 this.chartHumidity.ref.series[i].show();
+                this.chartO3.ref.series[i].show();
+                this.chartLuminosity.ref.series[i].show();
             } else {
                 this.chart.ref.series[i].hide();
                 this.chartHumidity.ref.series[i].hide();
+                this.chartO3.ref.series[i].hide();
+                this.chartLuminosity.ref.series[i].hide();
             }
         }
     }
