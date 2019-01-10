@@ -68,11 +68,13 @@ export class ChartComponent implements OnInit {
                 this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 0 );
                 this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 1 );
                 this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 2 );
+                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 3 );
                 j++;
             } else {
                 this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), this.randomTemperature()], 0 );
                 this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), this.randomTemperature()], 1 );
                 this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), this.randomTemperature()], 2 );
+                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 3 );
             }
         }
     }
