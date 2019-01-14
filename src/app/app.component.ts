@@ -18,10 +18,13 @@ export class AppComponent implements OnInit {
         );
     });
 
-    constructor(private dataService: DataService) {
-    }
+    constructor(private dataService: DataService) {}
 
     async ngOnInit() {
         this.devices = await this.dataService.loadData();
+        setInterval(() => {
+            console.log(this.dataService.downloadJSON('https://test_ws_smart_forest.data.thethingsnetwork.org/api/v2/query?last=1h', 'application/json', 'key ttn-account-v2.ECz0ci0dakr0g021a5_MaFDjFVwzbirzPVo4xa34FHo'));
+            }, 10000
+        )
     }
 }

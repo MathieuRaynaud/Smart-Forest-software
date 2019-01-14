@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
@@ -35,5 +35,12 @@ export class DataService {
             this.pinClickedName = pinName;
         }
         this.emitConfig(this.pinClickedName);
+    }
+
+    downloadJSON(address: string, accept: string, authorization: string) {
+        const headers = new HttpHeaders();
+        headers.set('Accept', accept);
+        headers.set('Authorization', authorization);
+        return this._httpClient.get(address, {headers});
     }
 }

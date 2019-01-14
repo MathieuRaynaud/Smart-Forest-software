@@ -141,28 +141,6 @@ export class ChartComponent implements OnInit {
         });
     }
 
-    randomTemperature() {
-        return 15 + Math.floor(Math.random() * 20) - Math.floor(Math.random() * 20);
-    }
-
-    add20Points() {
-        let j = 0;
-        for (let i = 0; i < 20; i++) {
-            if (i > 12) {
-                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 0 );
-                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 1 );
-                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 2 );
-                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 3 );
-                j++;
-            } else {
-                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), this.randomTemperature()], 0 );
-                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), this.randomTemperature()], 1 );
-                this.chart.addPoint([Date.UTC(2019, (2 + i), (2 + 2 * i)), this.randomTemperature()], 2 );
-                this.chart.addPoint([Date.UTC(2020, (2 + j), (2 + 2 * j)), this.randomTemperature()], 3 );
-            }
-        }
-    }
-
     displaySeries(serieToDisplay) {
         for (let i = 0; i < this.chart.ref.series.length; i++) {
             if (serieToDisplay === 'none' || this.chart.ref.series[i].name === serieToDisplay) {
