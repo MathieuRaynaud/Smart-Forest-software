@@ -36,11 +36,4 @@ export class DataService {
         }
         this.emitConfig(this.pinClickedName);
     }
-
-    downloadJSON(address: string, accept: string, authorization: string) {
-        const headers = new HttpHeaders();
-        headers.set('Accept', accept);
-        headers.set('Authorization', authorization);
-        return this._httpClient.get(address, {headers});
-    }
 }
