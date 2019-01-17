@@ -109,7 +109,7 @@ export class ChartComponent implements OnInit {
         },
         yAxis: {
             title: {
-                text: 'Luminosity (%)'
+                text: 'Luminosity (lux)'
             }
         },
         chart: {
