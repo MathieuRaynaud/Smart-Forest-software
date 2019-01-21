@@ -131,7 +131,7 @@ export class ChartComponent implements OnInit {
             await this.chartO3.addSeries({name: device.serie.name, data: []}, true);
             await this.chartLuminosity.addSeries({name: device.serie.name, data: []}, true);
             for (let i = 0; i < device.serie.data.length; i++) {
-                const date = Date.parse(device.serie.data[i].date);
+                const date = this.dataService.dateParser(device.serie.data[i].date);
                 this.chart.addPoint([date, parseInt(device.serie.data[i].temp, 10)], serieIndex);
                 this.chartHumidity.addPoint([date, parseInt(device.serie.data[i].hum, 10)], serieIndex);
                 this.chartO3.addPoint([date, parseInt(device.serie.data[i].o3, 10)], serieIndex);
@@ -158,9 +158,8 @@ export class ChartComponent implements OnInit {
     }
 
     async ngOnInit() {
-      this.devices = await this.dataService.loadData();
-      await this.initializeSeries();
-      //this.add20Points();
+        this.devices = await this.dataService.loadData();
+        await this.initializeSeries();
     }
 
 }

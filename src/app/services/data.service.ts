@@ -36,4 +36,14 @@ export class DataService {
         }
         this.emitConfig(this.pinClickedName);
     }
+
+    dateParser(date: string) {
+        const year = parseInt(date.substr(0, 3), 10);
+        const month = parseInt(date.substr(5, 6), 10);
+        const day = parseInt(date.substr(8, 9), 10);
+        const hour = parseInt(date.substr(11, 12), 10);
+        const min = parseInt(date.substr(14, 15), 10);
+        const sec = parseInt(date.substr(17, 18), 10);
+        return Date.UTC(year, month, day, hour, min, sec);
+    }
 }
